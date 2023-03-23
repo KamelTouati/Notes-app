@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {useParams, Link, useNavigate  } from 'react-router-dom';
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
-
+import { AiFillDelete } from "react-icons/ai";
 
 const NotePage = (history) => {
   const {id}  = useParams();
@@ -29,6 +29,16 @@ const NotePage = (history) => {
     })
   }
 
+  let deleteNote = async() => {
+    fetch(`http://127.0.0.1:8000/api/notes/${id}/delete/`, {
+    method: "DELETE", 
+    headers: {  
+      'Content-Type': 'application/json',
+    }
+    })
+    navigate('/');
+  }
+
   let handleSubmit = () => {
     updateNote();
     navigate('/');
@@ -41,6 +51,7 @@ const NotePage = (history) => {
         <div className='note-header'>
           <h3>
             <BsFillArrowLeftCircleFill onClick={handleSubmit}/>
+            <AiFillDelete onClick={deleteNote}/>
           </h3> 
         </div>
         <textarea onChange={(e) => {setNote({...note, 'body': e.target.value})}} defaultValue={note?.body}></textarea>
