@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {useParams, Link, useNavigate  } from 'react-router-dom';
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
-import { AiFillDelete } from "react-icons/ai";
+import { AiFillDelete, AiOutlineFileDone } from "react-icons/ai";
 
 const NotePage = (history) => {
   const {id}  = useParams();
@@ -14,9 +14,20 @@ const NotePage = (history) => {
   }, [id])
 
   let getNote = async() => {
+    if (id === 'new') return
     let response = await fetch(`http://127.0.0.1:8000/api/notes/${id}/`)
     let data = await response.json()
     setNote(data)
+  }
+  
+  let createNote = async() => {
+      fetch(`http://127.0.0.1:8000/api/notes/create/`, {
+      method: "POST", 
+      headers: {  
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(note)
+    })
   }
 
   let updateNote = async() => {
@@ -40,7 +51,14 @@ const NotePage = (history) => {
   }
 
   let handleSubmit = () => {
-    updateNote();
+    if(id !== "new" && note.body == '') {
+      deleteNote()
+    }else if (id !== 'new') {
+      updateNote();
+    } else if (id == 'new' & note !== null) {
+      console.log('new');
+      createNote()
+    }
     navigate('/');
   }
 
@@ -51,10 +69,14 @@ const NotePage = (history) => {
         <div className='note-header'>
           <h3>
             <BsFillArrowLeftCircleFill onClick={handleSubmit}/>
-            <AiFillDelete onClick={deleteNote}/>
           </h3> 
+          {id !== 'new' ? (
+            <AiFillDelete onClick={deleteNote}/>
+            ):(
+            <AiOutlineFileDone onClick={handleSubmit}/>
+          )}  
         </div>
-        <textarea onChange={(e) => {setNote({...note, 'body': e.target.value})}} defaultValue={note?.body}></textarea>
+        <textarea onChange={(e) => {setNote({...note, 'body': e.target.value})}} value={note?.body}></textarea>
       </div>
     </>
   )

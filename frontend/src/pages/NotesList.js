@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import {ListItem} from '../components/index'
+import {ListItem, AddButton} from '../components/index'
+import { MdAddCircle } from "react-icons/md";
 
 const NotesList = () => {
     let [notes, setNotes] = useState([])
@@ -27,6 +28,7 @@ const NotesList = () => {
                         // console.log('note: ', note)
                     ))}
                 </div>
+                <AddButton />
             </div>
         </>
     )
