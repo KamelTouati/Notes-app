@@ -1,11 +1,11 @@
 import './App.css';
 import {Header} from './components/index'
 import {NotesList, NotePage} from './pages/index'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className='container dark'>
           <div className="app">
           <Header />  
@@ -15,7 +15,7 @@ function App() {
           </Routes>
           </div>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

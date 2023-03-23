@@ -21,7 +21,8 @@ const NotePage = (history) => {
   }
   
   let createNote = async() => {
-      fetch(`http://127.0.0.1:8000/api/notes/create/`, {
+      // fetch(`http://127.0.0.1:8000/api/notes/create/`, {
+      fetch(`http://127.0.0.1:8000/api/notes/`, {
       method: "POST", 
       headers: {  
         'Content-Type': 'application/json',
@@ -31,7 +32,8 @@ const NotePage = (history) => {
   }
 
   let updateNote = async() => {
-      fetch(`http://127.0.0.1:8000/api/notes/${id}/update/`, {
+      // fetch(`http://127.0.0.1:8000/api/notes/${id}/update/`, {
+      fetch(`http://127.0.0.1:8000/api/notes/${id}/`, {
       method: "PUT", 
       headers: {  
         'Content-Type': 'application/json',
@@ -41,7 +43,8 @@ const NotePage = (history) => {
   }
 
   let deleteNote = async() => {
-    fetch(`http://127.0.0.1:8000/api/notes/${id}/delete/`, {
+    // fetch(`http://127.0.0.1:8000/api/notes/${id}/delete/`, {
+    fetch(`http://127.0.0.1:8000/api/notes/${id}/`, {
     method: "DELETE", 
     headers: {  
       'Content-Type': 'application/json',
